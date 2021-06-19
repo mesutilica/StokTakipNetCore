@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace StokTakip.Entities
 {
@@ -8,8 +9,9 @@ namespace StokTakip.Entities
         public int Id { get; set; }
         [DisplayName("Kategori")]
         public string KategoriAdi { get; set; }
-        [DisplayName("Açıklama")]
+        [DisplayName("Açıklama"), DataType(dataType:DataType.MultilineText)]
         public string KategoriAciklamasi { get; set; }
+        [ScaffoldColumn(false)]
         public DateTime EklenmeTarihi { get; set; }
         public bool Aktif { get; set; }
     }

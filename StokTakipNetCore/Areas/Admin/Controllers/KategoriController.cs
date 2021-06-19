@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StokTakip.BL;
+using StokTakip.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,11 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
     [Area("Admin")]
     public class KategoriController : Controller
     {
+        KategoriManager kategoriManager = new KategoriManager();
         // GET: KategoriController
         public ActionResult Index()
         {
-            return View();
+            return View(kategoriManager.GetAll());
         }
 
         // GET: KategoriController/Details/5
@@ -31,52 +34,83 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         // POST: KategoriController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Kategori kategori)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    kategori.EklenmeTarihi = DateTime.Now;
+                    kategoriManager.Add(kategori);
+                    return RedirectToAction("Index");
+                }
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Kayıt eklenirken hata oluştu");
             }
+            return View(kategori);
         }
 
         // GET: KategoriController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Kategori kategori = kategoriManager.Get(id.Value);
+            if (kategori == null)
+            {
+                return NotFound();
+            }
+            return View(kategori);
         }
 
         // POST: KategoriController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Kategori kategori)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    kategoriManager.Update(kategori);
+                    return RedirectToAction(nameof(Index));
+                }
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("", "Kayıt güncellenirken hata oluştu");
             }
+            return View(kategori);
         }
 
         // GET: KategoriController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Kategori kategori = kategoriManager.Get(id.Value);
+            if (kategori == null)
+            {
+                return NotFound();
+            }
+            return View(kategori);
         }
 
         // POST: KategoriController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
+                Kategori kategori = kategoriManager.Get(id);
+                kategoriManager.Delete(kategori.Id);
                 return RedirectToAction(nameof(Index));
             }
             catch

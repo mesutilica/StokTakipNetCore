@@ -11,10 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StokTakip.DAL", "StokTakip.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StokTakip.BL", "StokTakip.BL\StokTakip.BL.csproj", "{5BB19FF5-C6DD-4E33-855F-E3252965159C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "StokTakip.Core\Core.csproj", "{BF4C8BC0-3B31-476D-BF57-02A19B15958A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{08B7CCF7-7B8A-4348-9AEA-A276F0077AFE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,14 +33,6 @@ Global
 		{5BB19FF5-C6DD-4E33-855F-E3252965159C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BB19FF5-C6DD-4E33-855F-E3252965159C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BB19FF5-C6DD-4E33-855F-E3252965159C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF4C8BC0-3B31-476D-BF57-02A19B15958A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF4C8BC0-3B31-476D-BF57-02A19B15958A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF4C8BC0-3B31-476D-BF57-02A19B15958A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF4C8BC0-3B31-476D-BF57-02A19B15958A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{08B7CCF7-7B8A-4348-9AEA-A276F0077AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{08B7CCF7-7B8A-4348-9AEA-A276F0077AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{08B7CCF7-7B8A-4348-9AEA-A276F0077AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{08B7CCF7-7B8A-4348-9AEA-A276F0077AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

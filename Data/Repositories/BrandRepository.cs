@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Data.Repositories
 {
-    internal class BrandRepository : Repository<Brand>, IBrandRepository
+    public class BrandRepository : Repository<Brand>, IBrandRepository
     {
         private AppDbContext _appDbContext { get => _context as AppDbContext; }
         public BrandRepository(AppDbContext context) : base(context)
