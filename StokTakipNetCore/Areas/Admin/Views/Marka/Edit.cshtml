@@ -1,0 +1,47 @@
+﻿@model StokTakip.Entities.Marka
+
+@{
+    ViewData["Title"] = "Marka Düzenle";
+}
+
+<h4>Marka Düzenle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="MarkaAdi" class="control-label"></label>
+                <input asp-for="MarkaAdi" class="form-control" />
+                <span asp-validation-for="MarkaAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarkaAciklamasi" class="control-label"></label>
+                <input asp-for="MarkaAciklamasi" class="form-control" />
+                <span asp-validation-for="MarkaAciklamasi" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Aktif" /> @Html.DisplayNameFor(model => model.Aktif)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarkaLogo" class="control-label"></label>
+                <input asp-for="MarkaLogo" class="form-control" />
+                <span asp-validation-for="MarkaLogo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-success" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
