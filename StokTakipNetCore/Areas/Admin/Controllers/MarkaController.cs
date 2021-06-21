@@ -34,7 +34,7 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         // POST: MarkaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Marka marka)
+        public ActionResult Create(Marka marka, IFormFile Logo)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         // POST: MarkaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Marka marka)
+        public ActionResult Edit(int id, Marka marka, IFormFile Logo)
         {
             try
             {

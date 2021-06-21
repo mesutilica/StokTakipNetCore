@@ -1,0 +1,79 @@
+﻿@model StokTakip.Entities.Urun
+
+@{
+    ViewData["Title"] = "Ürün Ekle";
+}
+
+<h4>Ürün Ekle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="KategoriId" class="control-label"></label>
+                <select asp-for="KategoriId" class ="form-control" asp-items="ViewBag.KategoriId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MarkaId" class="control-label"></label>
+                <select asp-for="MarkaId" class ="form-control" asp-items="ViewBag.MarkaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="UrunAdi" class="control-label"></label>
+                <input asp-for="UrunAdi" class="form-control" />
+                <span asp-validation-for="UrunAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UrunAciklamasi" class="control-label"></label>
+                <input asp-for="UrunAciklamasi" class="form-control" />
+                <span asp-validation-for="UrunAciklamasi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="EklenmeTarihi" class="control-label"></label>
+                <input asp-for="EklenmeTarihi" class="form-control" />
+                <span asp-validation-for="EklenmeTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UrunFiyati" class="control-label"></label>
+                <input asp-for="UrunFiyati" class="form-control" />
+                <span asp-validation-for="UrunFiyati" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kdv" class="control-label"></label>
+                <input asp-for="Kdv" class="form-control" />
+                <span asp-validation-for="Kdv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="StokMiktari" class="control-label"></label>
+                <input asp-for="StokMiktari" class="form-control" />
+                <span asp-validation-for="StokMiktari" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Aktif" /> @Html.DisplayNameFor(model => model.Aktif)
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Anasayfa" /> @Html.DisplayNameFor(model => model.Anasayfa)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="Resim" class="control-label"></label>
+                <input asp-for="Resim" class="form-control" />
+                <span asp-validation-for="Resim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ekle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
