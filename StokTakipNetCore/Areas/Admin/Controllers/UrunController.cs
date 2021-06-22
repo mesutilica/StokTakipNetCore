@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using StokTakip.BL;
+using StokTakip.Entities;
+using StokTakipNetCore.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +15,8 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
     public class UrunController : Controller
     {
         UrunManager manager = new UrunManager();
+        KategoriManager kategoriManager = new KategoriManager();
+        MarkaManager markaManager = new MarkaManager();
         // GET: UrunController
         public ActionResult Index()
         {
@@ -27,34 +32,48 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         // GET: UrunController/Create
         public ActionResult Create()
         {
+            ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi");
+            ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi");
             return View();
         }
 
         // POST: UrunController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Urun urun, IFormFile Resim)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    urun.Resim = FileHelper.FileLoader(Resim, filePath: "/Img/Urunler/");
+                    urun.EklenmeTarihi = DateTime.Now;
+                    manager.Add(urun);
+                    return RedirectToAction(nameof(Index));
+                }
+                
             }
             catch
             {
-                return View();
+                ModelState.AddModelError("","Hata Oluştu!");
             }
+            ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi");
+            ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi");
+            return View();
         }
 
         // GET: UrunController/Edit/5
         public ActionResult Edit(int id)
         {
+            ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi");
+            ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi");
             return View();
         }
 
         // POST: UrunController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(Urun urun, IFormFile Resim)
         {
             try
             {
@@ -62,6 +81,8 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
             }
             catch
             {
+                ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi");
+                ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi");
                 return View();
             }
         }

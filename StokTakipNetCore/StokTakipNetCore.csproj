@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Img\Marka\" />
-    <Folder Include="wwwroot\Img\Urun\" />
+    <Folder Include="wwwroot\Img\Urunler\" />
   </ItemGroup>
 
 </Project>

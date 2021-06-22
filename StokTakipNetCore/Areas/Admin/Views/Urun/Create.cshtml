@@ -8,15 +8,15 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="KategoriId" class="control-label"></label>
-                <select asp-for="KategoriId" class ="form-control" asp-items="ViewBag.KategoriId"></select>
+                <select asp-for="KategoriId" class="form-control" asp-items="ViewBag.KategoriId" required><option value="">Seçiniz</option></select>
             </div>
             <div class="form-group">
                 <label asp-for="MarkaId" class="control-label"></label>
-                <select asp-for="MarkaId" class ="form-control" asp-items="ViewBag.MarkaId"></select>
+                <select asp-for="MarkaId" class="form-control" asp-items="ViewBag.MarkaId" required><option value="">Seçiniz</option></select>
             </div>
             <div class="form-group">
                 <label asp-for="UrunAdi" class="control-label"></label>
@@ -27,11 +27,6 @@
                 <label asp-for="UrunAciklamasi" class="control-label"></label>
                 <input asp-for="UrunAciklamasi" class="form-control" />
                 <span asp-validation-for="UrunAciklamasi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EklenmeTarihi" class="control-label"></label>
-                <input asp-for="EklenmeTarihi" class="form-control" />
-                <span asp-validation-for="EklenmeTarihi" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UrunFiyati" class="control-label"></label>
@@ -60,7 +55,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Resim" class="control-label"></label>
-                <input asp-for="Resim" class="form-control" />
+                <input asp-for="Resim" class="form-control" type="file" />
                 <span asp-validation-for="Resim" class="text-danger"></span>
             </div>
             <div class="form-group">
