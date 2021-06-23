@@ -26,9 +26,7 @@ namespace StokTakip.Entities
         public bool Aktif { get; set; }
         public bool Anasayfa { get; set; }
         public string Resim { get; set; }
-        [Required]
         public virtual Kategori Kategori { get; set; }//urun sınıfı ile kategori sınıfı arasında bire bir ilişki kurduk
-        [Required]
         public virtual Marka Marka { get; set; }
     }
 }

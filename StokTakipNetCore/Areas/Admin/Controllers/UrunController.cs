@@ -46,12 +46,12 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    urun.Resim = FileHelper.FileLoader(Resim, filePath: "/Img/Urunler/");
                     urun.EklenmeTarihi = DateTime.Now;
+                    urun.Resim = FileHelper.FileLoader(Resim, filePath: "/Img/Urunler/");
                     manager.Add(urun);
                     return RedirectToAction(nameof(Index));
                 }
-                
+                else ModelState.AddModelError("", "Kayıt Eklenemedi!");
             }
             catch
             {
@@ -59,7 +59,7 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
             }
             ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi");
             ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi");
-            return View();
+            return View(urun);
         }
 
         // GET: UrunController/Edit/5
@@ -73,18 +73,31 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         // POST: UrunController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Urun urun, IFormFile Resim)
+        public ActionResult Edit(Urun urun, int id, IFormFile Resim, string resmiSil)
         {
+            if (id != urun.Id)
+            {
+                return NotFound();
+            }
             try
             {
-                return RedirectToAction(nameof(Index));
+                if (ModelState.IsValid)
+                {
+                    if (resmiSil == "on")
+                        if (FileHelper.FileTerminator("/Img/Urunler/", urun.Resim)) urun.Resim = string.Empty;
+                    if (Resim != null && Resim.Length > 0) urun.Resim = FileHelper.FileLoader(Resim, filePath: "/Img/Urunler/");
+                    manager.Update(urun);
+                    return RedirectToAction(nameof(Index));
+                }
+                else ModelState.AddModelError("", "Kayıt Güncellenemedi!");
             }
             catch
             {
-                ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi");
-                ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi");
-                return View();
+                ModelState.AddModelError("", "Hata Oluştu!");
             }
+            ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi", urun.KategoriId);
+            ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi", urun.MarkaId);
+            return View(urun);
         }
 
         // GET: UrunController/Delete/5
