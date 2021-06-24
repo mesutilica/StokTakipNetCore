@@ -63,11 +63,14 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         }
 
         // GET: UrunController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi");
-            ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi");
-            return View();
+            if (id == null) return BadRequest();
+            Urun urun = manager.Get(id.Value);
+            if (urun == null) return NotFound();
+            ViewBag.KategoriId = new SelectList(kategoriManager.GetAll(), "Id", "KategoriAdi", urun.KategoriId);
+            ViewBag.MarkaId = new SelectList(markaManager.GetAll(), "Id", "MarkaAdi", urun.MarkaId);
+            return View(urun);
         }
 
         // POST: UrunController/Edit/5

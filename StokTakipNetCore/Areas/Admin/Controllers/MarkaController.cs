@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using StokTakip.BL;
 using StokTakip.Entities;
+using StokTakipNetCore.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,13 +35,14 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         // POST: MarkaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Marka marka, IFormFile Logo)
+        public ActionResult Create(Marka marka, IFormFile MarkaLogo)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     marka.EklenmeTarihi = DateTime.Now;
+                    marka.MarkaLogo = FileHelper.FileLoader(MarkaLogo, filePath: "/Img/Marka/");
                     manager.Add(marka);
                     return RedirectToAction("Index");
                 }
@@ -70,12 +72,19 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         // POST: MarkaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, Marka marka, IFormFile Logo)
+        public ActionResult Edit(int id, Marka marka, IFormFile MarkaLogo, string resmiSil)
         {
+            if (id != marka.Id)
+            {
+                return NotFound();
+            }
             try
             {
                 if (ModelState.IsValid)
                 {
+                    if (resmiSil == "on")
+                        if (FileHelper.FileTerminator("/Img/Marka/", marka.MarkaLogo)) marka.MarkaLogo = string.Empty;
+                    if (MarkaLogo != null && MarkaLogo.Length > 0) marka.MarkaLogo = FileHelper.FileLoader(MarkaLogo, filePath: "/Img/Marka/");
                     manager.Update(marka);
                     return RedirectToAction(nameof(Index));
                 }

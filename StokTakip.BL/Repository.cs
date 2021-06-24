@@ -34,7 +34,8 @@ namespace StokTakip.BL
         }
         public T Get(Expression<Func<T, bool>> expression = null)//veritabanındaki 1 tane kaydı lambda expression kullanarak (x=>x. şeklinde yazarak) bulup getirmek için bu metodu yazdık
         {
-            return expression == null ? _dbSet.FirstOrDefault() : _dbSet.FirstOrDefault(expression);//Bu kod metodun kullanıldığı yerde bir lambda sorgusu yazılmışsa o sorguya uyan kaydı döndürür, lambda sorgusu yazılmadan çağrılırsa ilgili tablodaki ilk kaydı döndürür, eğer kayıt bulunamazsa null döndürür
+            //return expression == null ? _dbSet.FirstOrDefault() : _dbSet.FirstOrDefault(expression);//Bu kod metodun kullanıldığı yerde bir lambda sorgusu yazılmışsa o sorguya uyan kaydı döndürür, lambda sorgusu yazılmadan çağrılırsa ilgili tablodaki ilk kaydı döndürür, eğer kayıt bulunamazsa null döndürür
+            return _dbSet.FirstOrDefault(expression);
         }
         public int Add(T entity)
         {
