@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="IRepository.cs" />
+    <Compile Remove="Repository.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Entities\StokTakip.Entities.csproj" />
     <ProjectReference Include="..\StokTakip.DAL\StokTakip.DAL.csproj" />
   </ItemGroup>

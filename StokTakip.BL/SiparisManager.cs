@@ -1,4 +1,5 @@
-﻿using StokTakip.Entities;
+﻿using StokTakip.DAL;
+using StokTakip.Entities;
 
 namespace StokTakip.BL
 {

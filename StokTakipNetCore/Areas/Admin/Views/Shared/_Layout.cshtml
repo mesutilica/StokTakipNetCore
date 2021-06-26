@@ -1,9 +1,25 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@{
+    //Session nesnesi c# ta oturum bilgilerini tutmamızı sağlar
+    var sessionName = new Byte[20];
+    bool nameOK = Context.Session.TryGetValue("admin", out sessionName);
+
+    if (!nameOK)
+    {
+        //Context.Response.Redirect("/Admin/Login");
+    }
+    /*else
+    {
+        string result = System.Text.Encoding.UTF8.GetString(sessionName);
+        <p> @result</p>
+    }*/
+
+}
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StokTakipNetCore</title>
+    <title>@ViewData["Title"] - Admin</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
@@ -29,6 +45,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Urun" asp-action="Index">Ürün Yönetimi</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Kullanici" asp-action="Index">Kullanıcı Yönetimi</a>
                         </li>
                     </ul>
                 </div>

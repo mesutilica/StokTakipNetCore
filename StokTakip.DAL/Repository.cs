@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StokTakip.DAL;
+using StokTakip.DAL.UnitOfWork;
 using StokTakip.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
-namespace StokTakip.BL
+namespace StokTakip.DAL
 {
     public class Repository<T> : IRepository<T> where T : class, IEntity, new()
     {

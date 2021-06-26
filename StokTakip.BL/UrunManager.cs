@@ -2,7 +2,7 @@
 
 namespace StokTakip.BL
 {
-    public class UrunManager : Repository<Urun>
+    public class UrunManager : DAL.Repository<Urun>
     {
     }
 }

@@ -2,81 +2,76 @@
 using Microsoft.AspNetCore.Mvc;
 using StokTakip.BL;
 using StokTakip.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StokTakipNetCore.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class KategoriController : Controller
+    public class KullaniciController : Controller
     {
-        KategoriManager kategoriManager = new KategoriManager();
-        // GET: KategoriController
+        KullaniciManager manager = new KullaniciManager();
+        // GET: KullaniciController
         public ActionResult Index()
         {
-            return View(kategoriManager.GetAll());
+            return View(manager.GetAll());
         }
 
-        // GET: KategoriController/Details/5
+        // GET: KullaniciController/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: KategoriController/Create
+        // GET: KullaniciController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: KategoriController/Create
+        // POST: KullaniciController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Kategori kategori)
+        public ActionResult Create(Kullanici kullanici)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    kategori.EklenmeTarihi = DateTime.Now;
-                    kategoriManager.Add(kategori);
-                    return RedirectToAction("Index");
+                    manager.Add(kullanici);
+                    return RedirectToAction(nameof(Index));
                 }
             }
             catch
             {
                 ModelState.AddModelError("", "Kayıt eklenirken hata oluştu");
             }
-            return View(kategori);
+            return View(kullanici);
         }
 
-        // GET: KategoriController/Edit/5
+        // GET: KullaniciController/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return BadRequest();
             }
-            Kategori kategori = kategoriManager.Get(id.Value);
-            if (kategori == null)
+            Kullanici kullanici = manager.Get(id.Value);
+            if (kullanici == null)
             {
                 return NotFound();
             }
-            return View(kategori);
+            return View(kullanici);
         }
 
-        // POST: KategoriController/Edit/5
+        // POST: KullaniciController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Kategori kategori)
+        public ActionResult Edit(Kullanici kullanici)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    kategoriManager.Update(kategori);
+                    manager.Update(kullanici);
                     return RedirectToAction(nameof(Index));
                 }
             }
@@ -84,33 +79,33 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
             {
                 ModelState.AddModelError("", "Kayıt güncellenirken hata oluştu");
             }
-            return View(kategori);
+            return View(kullanici);
         }
 
-        // GET: KategoriController/Delete/5
+        // GET: KullaniciController/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return BadRequest();
             }
-            Kategori kategori = kategoriManager.Get(id.Value);
-            if (kategori == null)
+            Kullanici kullanici = manager.Get(id.Value);
+            if (kullanici == null)
             {
                 return NotFound();
             }
-            return View(kategori);
+            return View(kullanici);
         }
 
-        // POST: KategoriController/Delete/5
+        // POST: KullaniciController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id)
         {
             try
             {
-                Kategori kategori = kategoriManager.Get(id);
-                kategoriManager.Delete(kategori.Id);
+                Kullanici kullanici = manager.Get(id);
+                manager.Delete(kullanici.Id);
                 return RedirectToAction(nameof(Index));
             }
             catch
