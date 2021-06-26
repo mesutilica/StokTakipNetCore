@@ -104,22 +104,35 @@ namespace StokTakipNetCore.Areas.Admin.Controllers
         }
 
         // GET: UrunController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return BadRequest();
+            }
+            Urun urun = manager.Get(id.Value);
+            if (urun == null)
+            {
+                return NotFound();
+            }
+            return View(urun);
         }
 
         // POST: UrunController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
+                var urun = manager.Get(id);
+                manager.Delete(urun.Id);
+                FileHelper.FileTerminator("/Img/Urunler/", urun.Resim);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                ModelState.AddModelError("", "Hata Oluştu!");
                 return View();
             }
         }
