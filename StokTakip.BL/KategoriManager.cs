@@ -1,4 +1,4 @@
-﻿using StokTakip.DAL;
+﻿using StokTakip.DAL.Repositories;
 using StokTakip.Entities;
 
 namespace StokTakip.BL

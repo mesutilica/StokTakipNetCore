@@ -1,8 +1,9 @@
-﻿using StokTakip.Entities;
+﻿using StokTakip.DAL.Repositories;
+using StokTakip.Entities;
 
 namespace StokTakip.BL
 {
-    public class UrunManager : DAL.Repository<Urun>
+    public class UrunManager : Repository<Urun>
     {
     }
 }

@@ -5,6 +5,10 @@ namespace StokTakip.Entities
 {
     public class Siparis : IEntity
     {
+        public Siparis()
+        {
+            Urunler = new List<Urun>();
+        }
         public int Id { get; set; }
         public string MusteriAdi { get; set; }
         public string MusteriSoyadi { get; set; }
@@ -14,6 +18,6 @@ namespace StokTakip.Entities
         public int UrunId { get; set; }
         public DateTime SiparisTarihi { get; set; }
         public DateTime TeslimatTarihi { get; set; }
-        public virtual List<Urun> Urunler { get; set; }
+        public virtual ICollection<Urun> Urunler { get; set; }
     }
 }

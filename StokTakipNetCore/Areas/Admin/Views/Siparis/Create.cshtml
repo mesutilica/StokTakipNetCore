@@ -1,0 +1,66 @@
+﻿@model StokTakip.Entities.Siparis
+
+@{
+    ViewData["Title"] = "Sipariş Oluştur";
+}
+
+<h4>Sipariş Oluştur</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MusteriAdi" class="control-label"></label>
+                <input asp-for="MusteriAdi" class="form-control" />
+                <span asp-validation-for="MusteriAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MusteriSoyadi" class="control-label"></label>
+                <input asp-for="MusteriSoyadi" class="form-control" />
+                <span asp-validation-for="MusteriSoyadi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ulke" class="control-label"></label>
+                <input asp-for="Ulke" class="form-control" />
+                <span asp-validation-for="Ulke" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Adres" class="control-label"></label>
+                <input asp-for="Adres" class="form-control" />
+                <span asp-validation-for="Adres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SiparisNo" class="control-label"></label>
+                <input asp-for="SiparisNo" class="form-control" />
+                <span asp-validation-for="SiparisNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UrunId" class="control-label"></label>
+                <input asp-for="UrunId" class="form-control" />
+                <span asp-validation-for="UrunId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SiparisTarihi" class="control-label"></label>
+                <input asp-for="SiparisTarihi" class="form-control" />
+                <span asp-validation-for="SiparisTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TeslimatTarihi" class="control-label"></label>
+                <input asp-for="TeslimatTarihi" class="form-control" />
+                <span asp-validation-for="TeslimatTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ekle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
